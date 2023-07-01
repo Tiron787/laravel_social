@@ -16,10 +16,23 @@
                 <label for="image">image</label>
                 <textarea class="form-control" id="image" name="image" placeholder="image"></textarea>
             </div>
-            {{-- <div class="form-group">
-                <label for="image">likes</label>
-                <textarea input type="number" class="form-control" id="Likes" placeholder="Likes"></textarea>
-            </div> --}}
+            <div class="form-group">
+                <label for="Category">Category</label>
+                <select class="form-control" id="Category" name="category_id">
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id}}">{{$category->title }}</option>
+                    @endforeach
+                  
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="Tags"> Tags</label>
+                <select multiple class="form-control" id="Tags" name="tags[]">
+                    @foreach ($tags as $tag)
+                  <option value="{{$tag->id}}">{{$tag->title}}</option> 
+                 @endforeach
+                </select>
+              </div>
             <button type="submit" class="btn btn-primary">CREATE</button>
         </form>
     </div>

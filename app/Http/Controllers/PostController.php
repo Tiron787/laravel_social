@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 use function PHPUnit\Framework\returnSelf;
@@ -12,40 +13,45 @@ class PostController extends Controller
 {
     public function index()
     {
-        
-$category = Category::find(1);
-        $post = Post::find(1);
+        $posts = Post::all();
 
-        dd($post->category);
+        return view('post.index', compact('posts'));
     }
 
     public function create()
     {
-        return view('post.create');
+        $categories = Category::all();
+        $tags = Tag::All();
+        return view('post.create', compact('categories', 'tags'));
     }
 
     public function store()
     {
-        $data = Request()->validate([
+        $data = request()->validate([
             'title' => 'string',
             'content' => 'string',
             'image' => 'string',
+            'category_id' => '',
+            'tags' => '',
         ]);
-        Post::create($data);
+        $tags = $data['tags'];
+        unset($data['tags']);
+        $post = Post::create($data);
+        $post->tags()->attach($tags);   //request to base
         return redirect()->route('post.index');
     }
 
-
-    public function show(Post $post){
-
+    public function show(Post $post)
+    {
         return view('post.show', compact('post'));
     }
 
-public function edit(Post $post){
-
-    return view('post.edit', compact('post'));
-}
-
+    public function edit(Post $post)
+    {
+        $categories = Category::all();
+        $tags = Tag::All(); 
+        return view('post.edit', compact('post', 'categories','tags'));
+    }
 
     public function update(Post $post)
     {
@@ -53,15 +59,21 @@ public function edit(Post $post){
             'title' => 'string',
             'content' => 'string',
             'image' => 'string',
-    ]);
-    $post->update($data);
-    return redirect()->route('post.show', $post->id);
+            'category_id' => '',
+            'tags' => '',
+        ]);
+        $tags = $data['tags'];
+        unset($data['tags']);
+        $post->update($data);
+        $post = $post->fresh();
+        $post->tags()->sync($tags);
+        return redirect()->route('post.show', $post->id);
     }
- 
-    public function destroy(Post $post){
 
+    public function destroy(Post $post)
+    {
         $post->delete();
-        return redirect ()->route ('post.index');
+        return redirect()->route('post.index');
     }
 
     public function delete()
