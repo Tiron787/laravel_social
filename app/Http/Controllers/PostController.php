@@ -105,7 +105,7 @@ class PostController extends Controller
             ],
         );
         dump($post->title);
-        dd('first or create');
+         dd('first or create');
     }
 
     public function updateOrCreate()

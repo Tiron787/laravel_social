@@ -36,4 +36,4 @@
             <button type="submit" class="btn btn-primary">CREATE</button>
         </form>
     </div>
-@endsection
+ @endsection
