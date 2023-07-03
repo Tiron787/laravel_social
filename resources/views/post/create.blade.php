@@ -6,20 +6,39 @@
             @csrf
             <div class="form-group">
                 <label for="title">title</label>
-                <input type="text" name="title" class="form-control" id="title" placeholder="title">
+                <input
+                value="{{old('title')}}"
+                type="text" name="title" class="form-control" id="title" placeholder="title">
             </div>
+
+            @error('title')
+            <p class="text-danger">{{$message}}</p>
+            @enderror
+
             <div class="form-group">
                 <label for="content">content</label>
-                <textarea class="form-control"  name="content" id="content" placeholder="content"></textarea>
+                <textarea class="form-control"  name="content" id="content" placeholder="content">{{old('content')}}</textarea>
             </div>
+
+            @error('content')
+            <p class="text-danger">{{$message}}</p>
+            @enderror
+
             <div class="form-group">
                 <label for="image">image</label>
-                <textarea class="form-control" id="image" name="image" placeholder="image"></textarea>
+                <input value="{{old('image')}}" class="form-control" id="image" name="image" type="text" placeholder="image">
             </div>
+
+            @error('image')
+            <p class="text-danger">{{$message}}</p>
+            @enderror
+
             <div class="form-group">
                 <label for="Category">Category</label>
                 <select class="form-control" id="Category" name="category_id">
+
                     @foreach ($categories as $category)
+                    {{old('category_id') == $category->id ? ' selected' : '' }}
                         <option value="{{ $category->id}}">{{$category->title }}</option>
                     @endforeach
                   
