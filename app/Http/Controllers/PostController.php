@@ -20,8 +20,9 @@ class PostController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
-        $tags = Tag::All();
+        //$categories = Category::all();
+        dd($tag->posts);
+        $tags = Tag::find(1);
         return view('post.create', compact('categories', 'tags'));
     }
 

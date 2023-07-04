@@ -7,18 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    
-    protected $table = 'posts';
-    protected $guarded = []; //false;
-    
-    public function category(){
+    use HasFactory;
 
-        return $this->belongsTo (category::class, 'category_id','id');
+    public function category()
+    {
+        return $tnis->belongsTo(Category::class);
+
     }
 
-    public function tags(){
-         return $this->belongsToMany(Tag::class, 'post_tags', 'post_id', 'tag_id');
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
-       
-    
 }
