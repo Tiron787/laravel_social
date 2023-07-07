@@ -37,7 +37,7 @@ class PostController extends Controller
         $tags = $data['tags'];
         unset($data['tags']);
         $post = Post::create($data);
-        $post->tags()->attach($tags);   //request to base
+        $post->tags()->attach($tags); //request to base
         return redirect()->route('post.index');
     }
 
@@ -49,8 +49,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
-        $tags = Tag::All(); 
-        return view('post.edit', compact('post', 'categories','tags'));
+        $tags = Tag::All();
+        return view('post.edit', compact('post', 'categories', 'tags'));
     }
 
     public function update(Post $post)
@@ -105,7 +105,7 @@ class PostController extends Controller
             ],
         );
         dump($post->title);
-         dd('first or create');
+        dd('first or create');
     }
 
     public function updateOrCreate()
