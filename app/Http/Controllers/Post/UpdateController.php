@@ -1,28 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Post;
+namespace App\Http\Controllers\Post; 
 use App\Models\Post;
-use App\Http\Controllers\Controller;
+
+use App\Http\Requests\Post\UpdateRequest;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Post\BaseController;
 
 use function PHPUnit\Framework\returnSelf;
 
-class UpdateController extends Controller
+class UpdateController extends BaseController
 {
-    public function __invoke(Post $post)
+    public function __invoke(UpdateRequest $request, Post $post)
     {
-        $data = Request()->validate([
-            'title' => 'string',
-            'content' => 'string',
-            'image' => 'string',
-            'category_id' => '',
-            'tags' => '',
-        ]);
-        $tags = $data['tags'];
-        unset($data['tags']);
-        $post->update($data);
-        $post = $post->fresh();
-        $post->tags()->sync($tags);
+        $data = $request->validated();
+
+        $this->service->update($post, $data);
+       
         return redirect()->route('post.show', $post->id);
     }
 }
+  

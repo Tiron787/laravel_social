@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use function PHPUnit\Framework\returnSelf;
 
-class DestroyController extends Controller
+class DestroyController extends BaseController
 {
     public function __invoke(Post $post)
     {

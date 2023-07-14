@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 use function PHPUnit\Framework\returnSelf;
 
-class IndexController extends Controller
+class IndexController extends BaseController
 {
     public function __invoke()
     {

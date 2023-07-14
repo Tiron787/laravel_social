@@ -2,26 +2,21 @@
 
 namespace App\Http\Controllers\Post;
 use App\Models\Post;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Post\StoreRequest;
+use App\Http\Controllers\Post\BaseController;
+use App\Http\Services;
+use Illuminate\Http\Request; 
 
 use function PHPUnit\Framework\returnSelf;
 
-class StoreController extends Controller
+class StoreController extends BaseController
 {
-    public function __invoke()
+    public function __invoke(StoreRequest $request)      
     {
-        $data = request()->validate([
-            'title' => 'string',
-            'content' => 'string',
-            'image' => 'string',
-            'category_id' => '',
-            'tags' => '',
-        ]);
-        $tags = $data['tags'];
-        unset($data['tags']);
-        $post = Post::create($data);
-        $post->tags()->attach($tags); //request to base
+        $data = $request->validated();
+        
+        $this->service->store($data);
+        
         return redirect()->route('post.index');
     }
 }

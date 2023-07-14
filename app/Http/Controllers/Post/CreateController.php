@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Post;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Tag;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Post\BaseController;
+
 use Illuminate\Http\Request;
 
 use function PHPUnit\Framework\returnSelf;
 
-class CreateController extends Controller
+class CreateController extends BaseController
 {
     public function __invoke()
     {
@@ -19,4 +20,4 @@ class CreateController extends Controller
         return view('post.create', compact('categories', 'tags'));
     }
 }
- 
+   

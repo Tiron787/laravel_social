@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use function PHPUnit\Framework\returnSelf;
 
-class ShowController extends Controller
+class ShowController extends BaseController
 {
     public function __invoke(Post $post)
     {
