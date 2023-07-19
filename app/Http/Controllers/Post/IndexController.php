@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 use function PHPUnit\Framework\returnSelf;
 
-class IndexController extends BaseController
+class IndexController extends BaseController 
 {
-    public function __invoke()
+    public function __invoke(FilterRequest $request)
     {
-        $posts = Post::all();
+        $posts = Post::paginate(10);
         return view('post.index', compact('posts'));
     }
 }
