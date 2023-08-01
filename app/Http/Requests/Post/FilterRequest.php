@@ -4,6 +4,7 @@ namespace App\Http\Requests\Post;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+
 class FilterRequest extends FormRequest
 {
     /**
@@ -24,9 +25,8 @@ class FilterRequest extends FormRequest
         return [
             'title' => 'string',
             'content' => 'string',
-            'image' => 'string',
             'category_id' => '',
-            'tags' => '',
+            
         ];
-    }
+    } 
 }
